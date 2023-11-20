@@ -43,9 +43,11 @@ xResolution.Value = 0.05
 xResolution:SetSingleStep(0.01)
 yResolution.Value = 0.05
 yResolution:SetSingleStep(0.01)
-xRange.Value = 3
+xRange:SetMaximum(1000)
+yRange:SetMaximum(1000)
+xRange.Value = 200
 xRange:SetSingleStep(0.1)
-yRange.Value = 3
+yRange.Value = 200
 yRange:SetSingleStep(0.1)
 frequencyBase:SetMaximum(10^11) --100 GHz
 frequencyBase.Value = 10^10 --10 Ghz

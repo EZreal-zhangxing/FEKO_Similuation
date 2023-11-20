@@ -47,7 +47,7 @@ for f=1,#mat_list-1 do
     -- inspect()
     config_source.StartPhi = initphi
     config_source.EndPhi = initphi+changeangle
-    config_source.PhiIncrement = (changeangle-initphi)/135
+    config_source.PhiIncrement = (changeangle)/135
     config_source.StartTheta = 90
     config_source.EndTheta = 90
     config_source.ThetaIncrement = 10

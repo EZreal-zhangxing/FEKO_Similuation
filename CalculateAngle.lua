@@ -37,10 +37,15 @@ u = vector_1
 v = vectorCrossProduct(temp,u)
 return {["U"] = u,["V"] = v}
 end
+
 -- theta_1 = 2.3833314e+01
 -- fi_1 = -1.2165939e+02
 -- theta_2 = 2.5402095e+01
 -- fi_2 = -1.1902152e+02
+-- x_1,y_1,z_1 = -0.3071004,-0.1525,0.4218997
+-- x_2,y_2,z_2 = -0.3071003,-0.1525,0.4018996
+-- U_V = calculateAngleWithCoordation(x_1,y_1,z_1,x_2,y_2,z_2)
+-- inspect(U_V)
 -- U_V = calculateAngle(theta_1,fi_1,theta_2,fi_2)
 -- inspect(U_V)
 -- r = 10

@@ -210,14 +210,16 @@ for f=1,nFreq do
 end
 test:close()
 --Apply Windowing Function to get rid of riples
-m = ApplyWindowMatrix(m, wf, freqSamples, angSamples)
 
+m = ApplyWindowMatrix(m, wf, freqSamples, angSamples)
+-- print(#m)
 --Fourier Transform
 mOut =FFT2D(m)/(freqSamples*angSamples)
+-- print(#mOut)
 --Rotate Right
 m = RotateRight(mOut, nFreqf, nAngf)
 
--- print(#mOut)
+
 
 
 --Change delta r values to that of the padded/interpolated range

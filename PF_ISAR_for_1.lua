@@ -437,8 +437,8 @@ for id=ang0sel1.Index+1,ang0sel2.Index+1,ang0seld.Index do
 	--写入txt
 	phi0name = num2name(math.deg(phi0),2)
 	DatasetName = "ISAR_" .. osSelector.Value .. "_" .. wfSelector.Value:sub(1,wfSelector.Value:find(" ")-1) .. (iCheckBox.Checked and "_P2C" or "").. "_s".. upsampleFactor.Value .. "_v" ..  phi0name.. "_ar" .. angrName
-    
-    local test = assert(io.open("./F35_100/"..DatasetName..".txt", "w"))
+    file_save_dir = "./F22_110/"
+    local test = assert(io.open(file_save_dir..DatasetName..".txt", "w"))
     --Populate Dataset
     for f=1,nFreq do
         for p = 1,nAng do
@@ -456,10 +456,28 @@ for id=ang0sel1.Index+1,ang0sel2.Index+1,ang0seld.Index do
     -- print(phi0name)
 
     --Rename Dataset
-    DatasetName = "ISAR_" .. osSelector.Value .. "_" .. wfSelector.Value:sub(1,wfSelector.Value:find(" ")-1) .. (iCheckBox.Checked and "_P2C" or "").. "_s".. upsampleFactor.Value .. "_v" ..  phi0name.. "_ar" .. angrName
+    DatasetName = "ISAR_" .. osSelector.Value .. "_" .. (iCheckBox.Checked and "_P2C" or "").. "_s".. upsampleFactor.Value .. "_v" ..  phi0name.. "_ar" .. angrName
     resdat.Label = nextName(DatasetName, app.StoredData)
 	
-	
+    function exportImage(dsName)
+        graph = app.CartesianSurfaceGraphs:Add()
+        farFieldPlot = graph.Plots:Add(app.StoredData[dsName])
+        inspect(farFieldPlot.Quantity)
+
+        farFieldPlot.Quantity.ValuesScaledToDB = true
+        
+        farFieldPlot.Legend.LogarithmicRange.Type = pf.Enums.LogScaleRangeTypeEnum.Fixed
+        farFieldPlot.Legend.LogarithmicRange.FixedRangeMin = -55
+        farFieldPlot.Legend.LogarithmicRange.FixedRangeMax = -10
+        -- Export an image at a specific aspect ratio
+        
+        graph:Restore()
+        graph:SetSize(1000,800)
+        graph:ExportImage(file_save_dir..string.format("%s",dsName), "png",1223,831)
+    end
+
+    exportImage(DatasetName)
+    
     if display3DView.Checked then
         if (ffSelector.Value.Configuration ~= nil) then
             view = app.Views:Add(ffSelector.Value.Configuration)

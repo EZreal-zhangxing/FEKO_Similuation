@@ -7,6 +7,8 @@ targetFile = paths["targetFile"]
 savePath = paths["savePath"]
 dataPath = paths["dataPath"]
 fileName = paths["fileName"]
+start_index = tonumber(paths["startIndex"])
+end_index = tonumber(paths["endIndex"])
 print(targetFile)
 print(savePath)
 print(dataPath)
@@ -21,9 +23,9 @@ config_source = project.SolutionConfigurations[1].Sources[1]
 config_source.StartPhi = "phi1"
 config_source.EndPhi = "phi2"
 config_source.PhiIncrement = "dphi"
-config_source.StartTheta = 90
-config_source.EndTheta = 90
-config_source.ThetaIncrement = 10
+-- config_source.StartTheta = "89"
+--      config_source.EndTheta = "90"
+-- config_source.ThetaIncrement = "0"
 properties = config_source:GetProperties()
 -- inspect(properties)
 -- properties.StartPhi
@@ -37,7 +39,11 @@ local file = assert(io.open(dataPath, "r" ), "Could not create the file for writ
 local read_matrix = file:read('*a')
 local mat_list = string.split(read_matrix, "\n")
 -- for f=1,5 do
-for f=1,#mat_list-1 do
+if(tonumber(end_index) == -1) then
+    end_index = #mat_list-1;
+end
+
+for f=start_index,end_index do
     anglenow = string.split(mat_list[f],",")
     anglenext = string.split(mat_list[f+1],",")
     U_V = calculateAngleWithCoordation(anglenow[1],anglenow[3],anglenow[2],anglenext[1],anglenext[3],anglenext[2])
@@ -53,7 +59,7 @@ for f=1,#mat_list-1 do
     config_source:SetProperties(properties)
     app:Save()
     -- Mesh the model
-    project.Mesher:Mesh()
+    -- project.Mesher:Mesh()
 
     -- Save project
     -- lfs.mkdir(string.format("D:/FEKO/SoftWare/F35/Data3MakeFile/F35%d",f))

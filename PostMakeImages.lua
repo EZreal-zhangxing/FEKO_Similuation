@@ -13,13 +13,13 @@ dbMax.Value = "-10"
 dbMin.Value = "-50"
 form:Add(pf.FormLabel.New("选择要成像的文件夹:"), 1, 1)
 form:Add(makeImagePath, 1, 2)
-
+makeImagePath.Value = "D:/FEKO/SoftWare/MQ1/record_mix_01_output/"
 form:Add(pf.FormLabel.New("View Angle:"), 2, 1)
 form:Add(viewAngle, 2, 2)
-
+viewAngle.Value = "-5.9952043329758e-14"
 form:Add(pf.FormLabel.New("Angle Range:"), 3, 1)
 form:Add(angleRange, 3, 2)
-
+angleRange.Value= "3.9168300858879"
 form:Add(pf.FormLabel.New("Max DB:"), 4, 1)
 form:Add(dbMax, 4, 2)
 

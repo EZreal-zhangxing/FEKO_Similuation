@@ -289,7 +289,12 @@ m = ApplyWindowMatrix(m, wf, freqSamples, angSamples)
 mOut =FFT2D(m)/(freqSamples*angSamples)
 --Rotate Right
 m = RotateRight(mOut, nFreqf, nAngf)
-
+print(nFreqf)
+print(nAngf)
+print(nFreq)
+print(nAng)
+print(freqSamples)
+print(angSamples)
 string.split = function(s, p)
 
     local rt= {}
